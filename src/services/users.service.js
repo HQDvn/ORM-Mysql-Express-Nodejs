@@ -20,12 +20,23 @@ export class HandleUpdate {
   static async update(id, data) {
     await HandleFind.findByPk(id);
 
-    //    Raw Query: UPDATE Users SET fullname = '${data.fullname}' WHERE id = '${id}'
+    //  Raw Query: UPDATE Users SET fullname = '${data.fullname}' WHERE id = '${id}'
     return await User.update(
       {
         fullname: data.fullname,
       },
-      { where: { id: id } },
+      { where: { id } },
     );
+  }
+}
+
+export class HandleRemove {
+  static async remove(id) {
+    await HandleFind.findByPk(id);
+
+    //  Raw Query: UPDATE Users SET deletedAt = NOW() WHERE id = '${id}'
+    return await User.destroy({
+      where: { id },
+    });
   }
 }
