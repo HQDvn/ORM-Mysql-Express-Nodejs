@@ -62,3 +62,14 @@ export class HandleRemove {
     });
   }
 }
+
+export class HandleRestore {
+  static async restore(id) {
+    await HandleFind.findRemoved(id);
+
+    //TODO  Raw Query: UPDATE Users SET deletedAt = NULL WHERE id = '${id}'
+    return await User.restore({
+      where: { id },
+    });
+  }
+}

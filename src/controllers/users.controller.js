@@ -1,4 +1,4 @@
-import { HandleFind, HandleUpdate, HandleRemove } from '../services/users.service';
+import { HandleFind, HandleUpdate, HandleRemove, HandleRestore } from '../services/users.service';
 
 export class UserFind {
   static async findByPk(req, res, next) {
@@ -63,6 +63,24 @@ export class UserRemove {
       res.status(200).json({
         status: 200,
         message: 'Successfully removed user.',
+        data: result,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+}
+
+export class UserRestore {
+  static async restore(req, res, next) {
+    try {
+      const id = req.params.id;
+
+      const result = await HandleRestore.restore(id);
+
+      res.status(200).json({
+        status: 200,
+        message: 'Successfully restored removed user.',
         data: result,
       });
     } catch (err) {
