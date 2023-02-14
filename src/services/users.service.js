@@ -15,3 +15,17 @@ export class HandleFind {
     return user;
   }
 }
+
+export class HandleUpdate {
+  static async update(id, data) {
+    await HandleFind.findByPk(id);
+
+    //    Raw Query: UPDATE Users SET fullname = '${data.fullname}' WHERE id = '${id}'
+    return await User.update(
+      {
+        fullname: data.fullname,
+      },
+      { where: { id: id } },
+    );
+  }
+}
