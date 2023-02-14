@@ -16,6 +16,22 @@ export class UserFind {
       next(err);
     }
   }
+
+  static async findRemoved(req, res, next) {
+    try {
+      const id = req.params.id;
+
+      const result = await HandleFind.findRemoved(id);
+
+      res.status(200).json({
+        status: 200,
+        message: `Found a removed user named: ${result.fullname}`,
+        data: result,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export class UserUpdate {
