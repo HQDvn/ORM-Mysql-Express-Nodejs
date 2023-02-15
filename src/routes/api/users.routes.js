@@ -6,6 +6,7 @@ import { UserFind, UserUpdate, UserRemove, UserRestore } from '../../controllers
 
 router.get('/', UserFind.findAll);
 router.get('/active', UserFind.findAllActive);
+router.get('/removed', UserFind.findAllRemoved);
 router.get('/:id', UserFind.findByPk);
 router.get('/removed/:id', UserFind.findRemoved);
 

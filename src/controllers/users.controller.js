@@ -60,6 +60,20 @@ export class UserFind {
       next(err);
     }
   }
+
+  static async findAllRemoved(req, res, next) {
+    try {
+      const result = await HandleFind.findAllRemoved();
+
+      res.status(200).json({
+        status: 200,
+        message: 'All Users.',
+        data: result,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export class UserUpdate {

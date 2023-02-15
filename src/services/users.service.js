@@ -64,6 +64,23 @@ export class HandleFind {
 
     return users;
   }
+
+  //##########################################################################################
+
+  static async findAllRemoved() {
+    //TODO  Raw Query: SELECT * FROM Users WHERE deletedAt IS NOT NULL ORDER BY fullname ASC;
+    const users = await User.findAll({
+      where: {
+        deletedAt: {
+          [Op.not]: null,
+        },
+      },
+      paranoid: false,
+      order: [['fullname', 'ASC']],
+    });
+
+    return users;
+  }
 }
 
 export class HandleUpdate {
