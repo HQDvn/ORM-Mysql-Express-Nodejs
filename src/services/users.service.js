@@ -36,6 +36,23 @@ export class HandleFind {
 
     return user;
   }
+
+  //##########################################################################################
+
+  static async findAll() {
+    //TODO  Raw Query: SELECT * FROM Users
+    //TODO             WHERE deletedAt IS NOT NULL OR deletedAt IS NULL
+    //TODO             ORDER BY deletedAt ASC
+    const users = await User.findAll({
+      where: {
+        [Op.or]: [{ deletedAt: { [Op.eq]: null } }, { deletedAt: { [Op.ne]: null } }],
+      },
+      paranoid: false,
+      order: [['deletedAt', 'ASC']],
+    });
+
+    return users;
+  }
 }
 
 export class HandleUpdate {
