@@ -46,6 +46,20 @@ export class UserFind {
       next(err);
     }
   }
+
+  static async findAllActive(req, res, next) {
+    try {
+      const result = await HandleFind.findAllActive();
+
+      res.status(200).json({
+        status: 200,
+        message: 'All Users.',
+        data: result,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export class UserUpdate {

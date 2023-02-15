@@ -5,6 +5,7 @@ const router = express.Router();
 import { UserFind, UserUpdate, UserRemove, UserRestore } from '../../controllers/users.controller';
 
 router.get('/', UserFind.findAll);
+router.get('/active', UserFind.findAllActive);
 router.get('/:id', UserFind.findByPk);
 router.get('/removed/:id', UserFind.findRemoved);
 

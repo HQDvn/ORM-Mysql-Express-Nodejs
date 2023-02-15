@@ -53,6 +53,17 @@ export class HandleFind {
 
     return users;
   }
+
+  //##########################################################################################
+
+  static async findAllActive() {
+    //TODO  Raw Query: SELECT * FROM Users WHERE deletedAt IS NULL ORDER BY fullname ASC
+    const users = await User.findAll({
+      order: [['fullname', 'ASC']],
+    });
+
+    return users;
+  }
 }
 
 export class HandleUpdate {
