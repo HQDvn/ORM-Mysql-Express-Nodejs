@@ -15,7 +15,10 @@ module.exports = (sequelize) => {
         primaryKey: true,
       },
       fullname: DataTypes.STRING,
-      email: DataTypes.STRING,
+      email: {
+        type: DataTypes.STRING,
+        defaultValue: '',
+      },
       password: DataTypes.STRING,
       passport: DataTypes.STRING,
       phone: DataTypes.STRING,

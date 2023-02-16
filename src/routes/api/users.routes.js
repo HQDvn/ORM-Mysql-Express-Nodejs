@@ -2,7 +2,12 @@ import express from 'express';
 
 const router = express.Router();
 
-import { UserFind, UserUpdate, UserRemove, UserRestore } from '../../controllers/users.controller';
+import {
+  UserFind,
+  UserUpdate,
+  UserRemove,
+  UserRestore,
+} from '../../controllers/users.controller';
 
 router.get('/', UserFind.findAll);
 router.get('/active', UserFind.findAllActive);
@@ -10,6 +15,7 @@ router.get('/removed', UserFind.findAllRemoved);
 router.get('/:id', UserFind.findByPk);
 router.get('/removed/:id', UserFind.findRemoved);
 
+router.put('/multiple', UserUpdate.multiple);
 router.put('/:id', UserUpdate.update);
 
 router.delete('/:id', UserRemove.remove);

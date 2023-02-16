@@ -1,4 +1,9 @@
-import { HandleFind, HandleUpdate, HandleRemove, HandleRestore } from '../services/users.service';
+import {
+  HandleFind,
+  HandleUpdate,
+  HandleRemove,
+  HandleRestore,
+} from '../services/users.service';
 
 export class UserFind {
   static async findByPk(req, res, next) {
@@ -82,12 +87,28 @@ export class UserUpdate {
       const id = req.params.id;
       const data = req.body;
 
-      const result = await HandleUpdate.update(id, data);
+      const result = await HandleUpdate.updateOne(id, data);
 
       res.status(200).json({
         status: 200,
         message: 'Successfully updated user.',
         data: result[0],
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async multiple(req, res, next) {
+    try {
+      const { data } = req.body;
+
+      const result = await HandleUpdate.updateMultiple(data);
+
+      res.status(200).json({
+        status: 200,
+        message: 'Successfully updated multiple users.',
+        data: result,
       });
     } catch (err) {
       next(err);
