@@ -3,6 +3,7 @@ import {
   HandleUpdate,
   HandleRemove,
   HandleRestore,
+  HandleDangerous,
 } from '../services/users.service';
 
 export class UserFind {
@@ -176,6 +177,24 @@ export class UserRestore {
       res.status(200).json({
         status: 200,
         message: 'Successfully restored multiple users removed.',
+        data: result,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+}
+
+export class UserDangerous {
+  static async hardRemove(req, res, next) {
+    try {
+      const id = req.params.id;
+
+      const result = await HandleDangerous.hardRemove(id);
+
+      res.status(200).json({
+        status: 200,
+        message: 'Successfully hard removed user.',
         data: result,
       });
     } catch (err) {

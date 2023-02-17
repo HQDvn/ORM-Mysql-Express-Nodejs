@@ -7,6 +7,7 @@ import {
   UserUpdate,
   UserRemove,
   UserRestore,
+  UserDangerous,
 } from '../../controllers/users.controller';
 
 router.get('/', UserFind.findAll);
@@ -23,5 +24,8 @@ router.delete('/:id', UserRemove.removeOne);
 
 router.put('/restore/multiple', UserRestore.restoreMultiple);
 router.put('/restore/:id', UserRestore.restoreOne);
+
+//! User Dangerous API, need to be careful when using it !
+router.delete('/dangerous/hard/:id', UserDangerous.hardRemove);
 
 export default router;

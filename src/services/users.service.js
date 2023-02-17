@@ -174,3 +174,14 @@ export class HandleRestore {
     });
   }
 }
+
+export class HandleDangerous {
+  static async hardRemove(id) {
+    await HandleFind.findByPk(id);
+
+    return await User.destroy({
+      where: { id },
+      force: true,
+    });
+  }
+}
