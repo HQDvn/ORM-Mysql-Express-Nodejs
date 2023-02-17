@@ -179,8 +179,23 @@ export class HandleDangerous {
   static async hardRemove(id) {
     await HandleFind.findByPk(id);
 
+    //TODO  Raw Query: DELETE FROM Users WHERE id = '${id}'
     return await User.destroy({
       where: { id },
+      force: true,
+    });
+  }
+
+  //##########################################################################################
+
+  static async hardRemoveMultiple(ids) {
+    if (!ids) {
+      throw new ErrorHandler('Please, enter users ID to remove !', 400);
+    }
+
+    //TODO  Raw Query: DELETE FROM Users WHERE id IN ('${id-1}','${id-2}', ...)
+    return await User.destroy({
+      where: { id: { [Op.in]: ids } },
       force: true,
     });
   }

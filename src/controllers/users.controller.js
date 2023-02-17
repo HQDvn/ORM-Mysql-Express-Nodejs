@@ -201,4 +201,20 @@ export class UserDangerous {
       next(err);
     }
   }
+
+  static async hardRemoveMultiple(req, res, next) {
+    try {
+      const ids = req.body.ids;
+
+      const result = await HandleDangerous.hardRemoveMultiple(ids);
+
+      res.status(200).json({
+        status: 200,
+        message: 'Successfully hard removed multiple users.',
+        data: result,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
