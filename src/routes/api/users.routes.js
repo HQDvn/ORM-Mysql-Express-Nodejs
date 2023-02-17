@@ -25,9 +25,10 @@ router.delete('/:id', UserRemove.removeOne);
 router.put('/restore/multiple', UserRestore.restoreMultiple);
 router.put('/restore/:id', UserRestore.restoreOne);
 
-//! User Dangerous API, need to be careful when using it !
+//! Dangerous API for users, need to be careful when using it !
 router.delete('/dangerous/hard/multiple', UserDangerous.hardRemoveMultiple);
 router.delete('/dangerous/hard/:id', UserDangerous.hardRemove);
 router.delete('/dangerous/remove', UserDangerous.removeAll);
+router.put('/dangerous/restore', UserDangerous.restoreAll);
 
 export default router;

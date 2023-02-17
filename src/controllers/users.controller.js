@@ -231,4 +231,18 @@ export class UserDangerous {
       next(err);
     }
   }
+
+  static async restoreAll(req, res, next) {
+    try {
+      const result = await HandleDangerous.restoreAll();
+
+      res.status(200).json({
+        status: 200,
+        message: 'Successfully restored all users removed.',
+        data: result,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
