@@ -82,7 +82,7 @@ export class UserFind {
 }
 
 export class UserUpdate {
-  static async update(req, res, next) {
+  static async updateOne(req, res, next) {
     try {
       const id = req.params.id;
       const data = req.body;
@@ -99,7 +99,7 @@ export class UserUpdate {
     }
   }
 
-  static async multiple(req, res, next) {
+  static async updateMultiple(req, res, next) {
     try {
       const { data } = req.body;
 
@@ -117,11 +117,11 @@ export class UserUpdate {
 }
 
 export class UserRemove {
-  static async remove(req, res, next) {
+  static async removeOne(req, res, next) {
     try {
       const id = req.params.id;
 
-      const result = await HandleRemove.remove(id);
+      const result = await HandleRemove.removeOne(id);
 
       res.status(200).json({
         status: 200,
@@ -132,14 +132,30 @@ export class UserRemove {
       next(err);
     }
   }
+
+  static async removeMultiple(req, res, next) {
+    try {
+      const ids = req.body.ids;
+
+      const result = await HandleRemove.removeMultiple(ids);
+
+      res.status(200).json({
+        status: 200,
+        message: 'Successfully removed many users.',
+        data: result,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export class UserRestore {
-  static async restore(req, res, next) {
+  static async restoreOne(req, res, next) {
     try {
       const id = req.params.id;
 
-      const result = await HandleRestore.restore(id);
+      const result = await HandleRestore.restoreOne(id);
 
       res.status(200).json({
         status: 200,

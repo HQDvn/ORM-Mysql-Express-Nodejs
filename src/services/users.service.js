@@ -122,7 +122,7 @@ export class HandleUpdate {
 }
 
 export class HandleRemove {
-  static async remove(id) {
+  static async removeOne(id) {
     await HandleFind.findByPk(id);
 
     //TODO  Raw Query: UPDATE Users SET deletedAt = NOW() WHERE id = '${id}'
@@ -130,10 +130,27 @@ export class HandleRemove {
       where: { id },
     });
   }
+
+  //##########################################################################################
+
+  static async removeMultiple(ids) {
+    if (!ids) {
+      throw new ErrorHandler('Please, enter users ID to remove !', 400);
+    }
+
+    //TODO  Raw Query: UPDATE Users SET deletedAt = NOW() WHERE id IN ('${id-1}','${id-2}', ...)
+    return await User.destroy({
+      where: {
+        id: {
+          [Op.in]: ids,
+        },
+      },
+    });
+  }
 }
 
 export class HandleRestore {
-  static async restore(id) {
+  static async restoreOne(id) {
     await HandleFind.findRemoved(id);
 
     //TODO  Raw Query: UPDATE Users SET deletedAt = NULL WHERE id = '${id}'

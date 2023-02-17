@@ -15,11 +15,12 @@ router.get('/removed', UserFind.findAllRemoved);
 router.get('/:id', UserFind.findByPk);
 router.get('/removed/:id', UserFind.findRemoved);
 
-router.put('/multiple', UserUpdate.multiple);
-router.put('/:id', UserUpdate.update);
+router.put('/multiple', UserUpdate.updateMultiple);
+router.put('/:id', UserUpdate.updateOne);
 
-router.delete('/:id', UserRemove.remove);
+router.delete('/multiple', UserRemove.removeMultiple);
+router.delete('/:id', UserRemove.removeOne);
 
-router.put('/restore/:id', UserRestore.restore);
+router.put('/restore/:id', UserRestore.restoreOne);
 
 export default router;
