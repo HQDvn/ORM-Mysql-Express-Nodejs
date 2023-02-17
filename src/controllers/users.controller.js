@@ -245,4 +245,18 @@ export class UserDangerous {
       next(err);
     }
   }
+
+  //! DANGEROUS EXTREME
+  static async hardRemoveAll(req, res, next) {
+    try {
+      await HandleDangerous.hardRemoveAll();
+
+      res.status(200).json({
+        status: 200,
+        message: 'Successfully hard removed all users.',
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }

@@ -212,7 +212,19 @@ export class HandleDangerous {
   //##########################################################################################
 
   static async restoreAll() {
-    //TODO  Raw Query: UPDATE Users SET deletedAt = NULL;
+    //TODO  Raw Query: UPDATE Users SET deletedAt = NULL
     return await User.restore();
+  }
+
+  //##########################################################################################
+
+  //! DANGEROUS EXTREME
+  static async hardRemoveAll() {
+    //TODO  Raw Query: DELETE FROM Users
+    return await User.destroy({
+      where: {},
+      truncate: true,
+      force: true,
+    });
   }
 }
