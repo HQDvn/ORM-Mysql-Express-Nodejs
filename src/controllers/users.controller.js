@@ -217,4 +217,18 @@ export class UserDangerous {
       next(err);
     }
   }
+
+  static async removeAll(req, res, next) {
+    try {
+      const result = await HandleDangerous.removeAll();
+
+      res.status(200).json({
+        status: 200,
+        message: 'Successfully removed all users.',
+        data: result,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }

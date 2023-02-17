@@ -199,4 +199,13 @@ export class HandleDangerous {
       force: true,
     });
   }
+
+  //##########################################################################################
+
+  static async removeAll() {
+    //TODO  Raw Query: UPDATE Users SET deletedAt = NOW();
+    return await User.destroy({
+      where: {},
+    });
+  }
 }
