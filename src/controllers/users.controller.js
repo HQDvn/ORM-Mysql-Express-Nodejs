@@ -141,7 +141,7 @@ export class UserRemove {
 
       res.status(200).json({
         status: 200,
-        message: 'Successfully removed many users.',
+        message: 'Successfully removed multiple users.',
         data: result,
       });
     } catch (err) {
@@ -160,6 +160,22 @@ export class UserRestore {
       res.status(200).json({
         status: 200,
         message: 'Successfully restored removed user.',
+        data: result,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async restoreMultiple(req, res, next) {
+    try {
+      const ids = req.body.ids;
+
+      const result = await HandleRestore.restoreMultiple(ids);
+
+      res.status(200).json({
+        status: 200,
+        message: 'Successfully restored multiple users removed.',
         data: result,
       });
     } catch (err) {

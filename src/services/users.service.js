@@ -158,4 +158,19 @@ export class HandleRestore {
       where: { id },
     });
   }
+
+  //##########################################################################################
+
+  static async restoreMultiple(ids) {
+    if (!ids) {
+      throw new ErrorHandler('Please, enter users ID to restore !', 400);
+    }
+
+    //TODO  Raw Query: UPDATE Users SET deletedAt = NULL WHERE id IN ('${id-1}','${id-2}', ...)
+    return await User.restore({
+      where: {
+        id: { [Op.in]: ids },
+      },
+    });
+  }
 }

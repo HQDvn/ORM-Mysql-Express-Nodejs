@@ -21,6 +21,7 @@ router.put('/:id', UserUpdate.updateOne);
 router.delete('/multiple', UserRemove.removeMultiple);
 router.delete('/:id', UserRemove.removeOne);
 
+router.put('/restore/multiple', UserRestore.restoreMultiple);
 router.put('/restore/:id', UserRestore.restoreOne);
 
 export default router;
