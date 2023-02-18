@@ -4,6 +4,26 @@ import ErrorHandler from '../helper/error.helper';
 
 const User = db.User;
 
+export class HandleRegister {
+  static async registerOne(data) {
+    //TODO  Raw Query:
+    //TODO  INSERT INTO Users (id, fullname, email, password,
+    //TODO                    passport, phone, role, createdAt, updatedAt)
+    //TODO  VALUES (UUID(), '${fullname}', '${email}', SHA2('${password}', 256),
+    //TODO         '${passport}', '${phone}', '${role}', NOW(), NOW())
+    const user = await User.create({
+      fullname: data.fullname,
+      email: data.email,
+      password: data.password,
+      passport: data.passport,
+      phone: data.phone,
+      role: 'customer',
+    });
+
+    return user;
+  }
+}
+
 export class HandleFind {
   static async findByPk(id) {
     //TODO  Raw Query: SELECT * FROM Users WHERE id = '${id}' AND deletedAt IS NULL

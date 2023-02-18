@@ -1,4 +1,9 @@
+import dotenv from 'dotenv';
+import bcrypt from 'bcryptjs';
+import { v4 as uuidv4 } from 'uuid';
 import { Model, DataTypes } from 'sequelize';
+
+dotenv.config();
 
 module.exports = (sequelize) => {
   class User extends Model {
@@ -31,6 +36,30 @@ module.exports = (sequelize) => {
       paranoid: true,
     },
   );
+
+  User.prototype.validPassword = (password) => {
+    return bcrypt.compareSync(password, this.password);
+  };
+
+  const hashPassword = (password) => {
+    return bcrypt.hashSync(password, parseInt(process.env.SALT));
+  };
+
+  User.beforeSave((user, options) => {
+    user.password = hashPassword(user.password);
+  });
+
+  User.beforeCreate((user, options) => {
+    user.id = uuidv4();
+    user.password = hashPassword(user.password);
+  });
+
+  User.beforeBulkCreate((users, options) => {
+    for (const user of users) {
+      user.id = uuidv4();
+      user.password = hashPassword(user.password);
+    }
+  });
 
   return User;
 };

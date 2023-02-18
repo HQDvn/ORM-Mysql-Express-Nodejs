@@ -1,10 +1,29 @@
 import {
+  HandleRegister,
   HandleFind,
   HandleUpdate,
   HandleRemove,
   HandleRestore,
   HandleDangerous,
 } from '../services/users.service';
+
+export class UserRegister {
+  static async registerOne(req, res, next) {
+    try {
+      const data = req.body;
+
+      const result = await HandleRegister.registerOne(data);
+
+      res.status(201).json({
+        status: 201,
+        message: 'Successfully created new a user.',
+        data: result,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+}
 
 export class UserFind {
   static async findByPk(req, res, next) {

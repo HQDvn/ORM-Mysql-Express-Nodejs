@@ -3,12 +3,15 @@ import express from 'express';
 const router = express.Router();
 
 import {
+  UserRegister,
   UserFind,
   UserUpdate,
   UserRemove,
   UserRestore,
   UserDangerous,
 } from '../../controllers/users.controller';
+
+router.post('/register', UserRegister.registerOne);
 
 router.get('/', UserFind.findAll);
 router.get('/active', UserFind.findAllActive);
