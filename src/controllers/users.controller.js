@@ -23,6 +23,22 @@ export class UserRegister {
       next(err);
     }
   }
+
+  static async registerMultiple(req, res, next) {
+    try {
+      const data = req.body.users;
+
+      const result = await HandleRegister.registerMultiple(data);
+
+      res.status(201).json({
+        status: 201,
+        message: 'Successfully created new multiple user.',
+        data: result,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export class UserFind {

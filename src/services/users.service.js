@@ -22,6 +22,19 @@ export class HandleRegister {
 
     return user;
   }
+
+  //##########################################################################################
+
+  static async registerMultiple(data) {
+    //TODO   INSERT INTO Users (id, fullname, email, password,
+    //TODO                     passport, phone, role, createdAt, updatedAt)
+    //TODO   VALUES ${data.map(user => `(
+    //TODO     UUID(), '${user.fullname}', '${user.email}', SHA2('${user.password}', 256),
+    //TODO     '${user.passport}', '${user.phone}', 'customer', NOW(), NOW() )`).join(',')};`
+    const users = await User.bulkCreate(data);
+
+    return users;
+  }
 }
 
 export class HandleFind {

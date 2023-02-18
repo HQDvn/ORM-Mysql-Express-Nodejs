@@ -12,6 +12,7 @@ import {
 } from '../../controllers/users.controller';
 
 router.post('/register', UserRegister.registerOne);
+router.post('/register/multiple', UserRegister.registerMultiple);
 
 router.get('/', UserFind.findAll);
 router.get('/active', UserFind.findAllActive);
