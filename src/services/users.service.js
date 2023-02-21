@@ -1,11 +1,17 @@
 import { Op } from 'sequelize';
 import db from '../models/index';
 import ErrorHandler from '../helper/error.helper';
+import validator from '../validator/index.val';
 
 const User = db.User;
 
 export class HandleRegister {
   static async registerOne(data) {
+    const { error } = validator.register(data);
+
+    if (error) {
+      throw new ErrorHandler(error.message, 400);
+    }
     //TODO  Raw Query:
     //TODO  INSERT INTO Users (id, fullname, email, password,
     //TODO                    passport, phone, role, createdAt, updatedAt)
@@ -17,7 +23,7 @@ export class HandleRegister {
       password: data.password,
       passport: data.passport,
       phone: data.phone,
-      role: 'customer',
+      role: data.role,
     });
 
     return user;
